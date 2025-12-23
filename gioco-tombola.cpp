@@ -6,7 +6,6 @@ int main(){
 	
 	int estratto=rand()%90+1, num_cartella;
 	
-	
 	cout<<"GIOCO DELLA TOMBOLA!!!\n\n";
 	
 	cout<<"tabellone dei numeri:\n"<<endl;
