@@ -4,6 +4,8 @@ using namespace std;
 
 int main(){
 	
+	srand(time(NULL));
+	
 	int estratto=rand()%90+1, num_cartella;
 	
 	cout<<"GIOCO DELLA TOMBOLA!!!\n\n";
@@ -35,24 +37,50 @@ int main(){
 		
 	cout<<"\n\ncartelle giocatori:\n\n";
 	
-	//genera due cartelle
-	for(int i=0; i<2; i++){
-    	cout<<"---------------"<<endl;
-    	
-    	//genera i numeri da mettere nelle cartelle
-    	for(int i=1; i<=15; i++){
-        	num_cartella=rand()%90+1;
-        	cout<<num_cartella<<" ";
-        	
-			//ogni riga contiene cinque numeri e poi va a capo con la riga successiva
-        	if(i%5==0){
-            	cout<<endl;
-            	cout<<"---------------"<<endl;
-        	}
-    	}
-    cout<<endl;
+	int numeri[5], ordine, precedente=0;
+	for(int i=0; i<3; i++){
+		//ciclo per generare i numeri da mettere nelle cartelle
+	for(int i=0; i<5; i++){
+		num_cartella=rand()%90+1;
+		numeri[i]=num_cartella;
+		
+		//se i numeri sono uguali non si stampano e se ne fanno altri
+		if(num_cartella==precedente){
+			i--;
+			continue;
+		}
+		precedente=num_cartella;	
 	}
+	
+	//ciclo che mette in ordine i numeri generati
+	for(int i=0; i<4; i++){
+		for(int w=i+1; w<5; w++){
+			
+			//se il numero in posizione i è maggiore del numero in posizione i+1 allora vengono ordinati
+			if(numeri[i]>numeri[w]){
+				
+				//ordine è una variabile di appoggio a cui assegno il valore del numero in poszione i
+				ordine=numeri[i];
+				
+				//poi scambio il numero in poszione i con quello nella posizione i+1 così si ordinano in modo crescente
+				numeri[i]=numeri[w];
+				
+				//infine assegno il valore del numero nella poszione i+1 alla variabile di appoggio per riconfrontarli
+				numeri[w]=ordine;	
+			}
+			
+		}
+	}
+	
+	//ciclo che stampa la sequenza in ordine
+	for(int i=0; i<5; i++){
+		cout<<numeri[i]<<" ";
+	}
+	cout<<endl;
+	cout<<"---------------"<<endl;
+	
+	}
+	
     
     return 0;
 }
-
