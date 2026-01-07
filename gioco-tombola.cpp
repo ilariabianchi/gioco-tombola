@@ -35,52 +35,106 @@ int main(){
     	}
 	}
 		
-	cout<<"\n\ncartelle giocatori:\n\n";
+	cout<<"\n\ncartelle giocatori:\n quanti cartelle vuoi generare? ";
+	cin>>num_cartella;
+	cout<<endl;
 	
-	int numeri[5], ordine, precedente=0;
-	for(int i=0; i<3; i++){
-		//ciclo per generare i numeri da mettere nelle cartelle
-	for(int i=0; i<5; i++){
-		num_cartella=rand()%90+1;
-		numeri[i]=num_cartella;
-		
-		//se i numeri sono uguali non si stampano e se ne fanno altri
-		if(num_cartella==precedente){
-			i--;
-			continue;
-		}
-		precedente=num_cartella;	
-	}
-	
-	//ciclo che mette in ordine i numeri generati
-	for(int i=0; i<4; i++){
-		for(int w=i+1; w<5; w++){
+	//inizializzo array a zero
+    int cartelle[3][9]={0}, numeri[91]={0};
+    
+    int numeri_usati, colonna, n;
+   	for(int c=0; c<num_cartella; c++){
+   		
+   		cout<<"cartella numero: "<<c+1<<endl;
+   		
+   		//resetto gli array per generare più cartelle
+   		for(int i=0;i<3;i++){
+        	for(int j=0;j<9;j++){
+            	cartelle[i][j]=0;
+        	}
+    	}
+    	//resetto anxche qui
+    	for(int i=0;i<=90;i++){
+        	numeri[i]=0;
+    	}
+   	
+   	for(int i=0; i<3; i++){
+    	
+        numeri_usati = 0;
+
+        while(numeri_usati<5){
+            colonna = rand()%9;
 			
-			//se il numero in posizione i è maggiore del numero in posizione i+1 allora vengono ordinati
-			if(numeri[i]>numeri[w]){
-				
-				//ordine è una variabile di appoggio a cui assegno il valore del numero in poszione i
-				ordine=numeri[i];
-				
-				//poi scambio il numero in poszione i con quello nella posizione i+1 così si ordinano in modo crescente
-				numeri[i]=numeri[w];
-				
-				//infine assegno il valore del numero nella poszione i+1 alla variabile di appoggio per riconfrontarli
-				numeri[w]=ordine;	
+			//se lo spazio è già occupato genero altri numeri
+            if(cartelle[i][colonna]!=0){
+            	continue;
+			} 
+			
+			//se è la prima colonna (0) stampo i  numeri da 1 a 10
+            if(colonna==0){
+            	 n=rand()%9+1;   
+			} 
+			
+			//se è l'ultima colonna (8) fa i numeri tra 80 e 90   
+            else if(colonna==8){
+            	 n=rand()%11+80; 
 			}
 			
-		}
-	}
-	
-	//ciclo che stampa la sequenza in ordine
-	for(int i=0; i<5; i++){
-		cout<<numeri[i]<<" ";
-	}
-	cout<<endl;
-	cout<<"---------------"<<endl;
-	
-	}
-	
+			//tutte le altre colonne
+            else {
+            	n=rand()%10+colonna*10; 
+			}    
+			
+			//controlla quali numeri sono stati già messi
+            if(numeri[n]==0){
+            	
+            	//se è libero metto il numero
+                cartelle[i][colonna]=n;
+                
+                //lo segno come occupato
+                numeri[n]=1;
+                
+                //incremento i numeri usati (5 per riga)
+                numeri_usati++;
+            }
+        }
+    }
+
+    // stampa cartella
     
+    //for per righe
+    for(int i=0;i<3;i++){
+    	cout<<"---------------------------"<<endl;
+
+    	//for per colonne
+        for(int w=0;w<9;w++){
+
+        	//se nello spazio c'è zero metto lo spazio
+            if(cartelle[i][w]==0){
+            	cout<<"   ";
+            
+            //se è <10 metto lo spazio anche prima per allineeralo
+			}
+            else if(cartelle[i][w]<10){
+            	cout<<" "<< cartelle[i][w]<<" ";
+			} 
+			
+			//negli altri caso stampo il numero normalmente
+            else{
+            	cout<<cartelle[i][w]<<" ";	
+			}
+        }
+        cout<<endl;
+    }
+    cout<<"---------------------------"<<endl<<endl<<endl;
+	}
+   	
+    
+
+
+
+
+
     return 0;
+
 }
