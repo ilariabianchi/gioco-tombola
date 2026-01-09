@@ -9,10 +9,8 @@ int main(){
 	
 	srand(time(NULL));
 	
-	int sorteggio=rand()%90+1, num_cartella;
-	int cartelle[3][9], numeri[91];
-    int numeri_messi, colonna, n;
-    
+	int estratto=rand()%90+1, num_cartella;
+	
 	cout<<"\33[1m";
 	cout<<"\33[38;5;168m"; 
 	cout<<"GIOCO DELLA TOMBOLA!!!\n";
@@ -24,10 +22,43 @@ int main(){
 	cout<<endl;
 	
 	cout<<"\33[3m";
-	cout<<"perfetto, iniziamo!\n";
+	cout<<"perfetto, iniziamo!\n\n";
 	cout<<"\33[23m";
+	
+	cout<<"\33[38;5;174m";
+	cout<<"il numero estratto e'... "<<estratto<<endl<<endl;
+	cout<<"\33[0m";
+	
+	cout<<"tabellone dei numeri:\n"<<endl;
+	
+	//ciclo for che stampa i numeri da 1 a 90
+	for(int i=1; i<=90; i++){
+		
+		//ciclo while per incolonnare giusti i primi 10 numeri
+    	while (i<11){
+    	
+    		if(i==1){
+    			cout<<i<<"  ";
+				i++;	
+			}
+			cout<<" "<<i<<"  ";
+			i++;
+			if(i==11){
+				cout<<endl<<endl;
+			}
+		}
+    	cout<<i<<"  ";
+    	
+    	//ogni volta che vengono stampati 10 numeri va a capo
+    	if(i%10==0){
+        	cout<<endl<<endl;
+    	}
+	}
 
 	//inizializzo array a zero
+    int cartelle[3][9], numeri[91];
+    
+    int numeri_messi, colonna, n;
     
    	for(int c=0; c<num_cartella; c++){
    		
@@ -117,35 +148,8 @@ int main(){
     }
     cout<<"---------------------------"<<endl<<endl<<endl;
 	}
-	
-   	cout<<"\33[38;5;174m";
-	cout<<"il numero estratto e'... "<<sorteggio<<endl<<endl;
-	cout<<"\33[0m";
-	
-   	cout<<"tabellone dei numeri:\n"<<endl;
-	
-	//ciclo for che stampa i numeri da 1 a 90
-	for(int i=1; i<=90; i++){	
-		//ciclo while per incolonnare giusti i primi 10 numeri
-    	while (i<11){
-    	
-    		if(i==1){
-    			cout<<i<<"  ";
-				i++;	
-			}
-			cout<<" "<<i<<"  ";
-			i++;
-			if(i==11){
-				cout<<endl<<endl;
-			}
-		}
-    	cout<<i<<"  ";
-    	
-    	//ogni volta che vengono stampati 10 numeri va a capo
-    	if(i%10==0){
-        	cout<<endl<<endl;
-    	}
-	}
-	
-	return 0;
+   	
+    
+    return 0;
+
 }
